@@ -1,341 +1,402 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>استبيان ورشة UI/UX</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+  <title>استبيان ورشة UI/UX</title>
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
 
-body{
-  font-family:'Cairo',sans-serif;
-  min-height:100vh;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at top right,#312e81 0%,transparent 30%),
-    radial-gradient(circle at bottom left,#0f766e 0%,transparent 25%),
-    linear-gradient(160deg,#050816,#0b1020,#111827);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:18px;
-  color:white;
-}
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
 
-.container{
-  width:100%;
-  max-width:390px;
-  position:relative;
-}
+    body{
+      font-family:'Cairo',sans-serif;
+      min-height:100vh;
+      overflow:hidden;
 
-.card{
-  background:rgba(17,24,39,.82);
-  backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:30px;
-  padding:28px 22px;
-  position:relative;
-  overflow:hidden;
-  box-shadow:
-    0 0 40px rgba(0,0,0,.35),
-    inset 0 1px 0 rgba(255,255,255,.05);
-}
+      display:flex;
+      justify-content:center;
+      align-items:center;
 
-.glow{
-  position:absolute;
-  width:180px;
-  height:180px;
-  border-radius:50%;
-  filter:blur(60px);
-  opacity:.25;
-}
+      padding:20px;
 
-.glow.one{
-  background:#a259ff;
-  top:-70px;
-  right:-60px;
-}
+      background:
+        radial-gradient(circle at top right,#312e81 0%,transparent 30%),
+        radial-gradient(circle at bottom left,#0f766e 0%,transparent 25%),
+        linear-gradient(160deg,#050816,#0b1020,#111827);
 
-.glow.two{
-  background:#1abcfe;
-  bottom:-70px;
-  left:-60px;
-}
+      color:white;
+    }
 
-.logo{
-  display:flex;
-  justify-content:center;
-  margin-bottom:18px;
-}
+    .container{
+      width:100%;
+      max-width:430px;
+    }
 
-.logo .dots{
-  display:flex;
-  gap:8px;
-}
+    .card{
+      position:relative;
+      overflow:hidden;
 
-.dot{
-  width:14px;
-  height:14px;
-  border-radius:50%;
-}
+      min-height:720px;
 
-.d1{background:#f24e1e;}
-.d2{background:#ff7262;}
-.d3{background:#a259ff;}
-.d4{background:#1abcfe;}
-.d5{background:#0acf83;}
+      background:rgba(17,24,39,.82);
+      backdrop-filter:blur(14px);
 
-.title{
-  text-align:center;
-  font-size:28px;
-  font-weight:800;
-  line-height:1.5;
-  margin-bottom:12px;
-}
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:34px;
 
-.subtitle{
-  text-align:center;
-  color:#b9c1d9;
-  font-size:14px;
-  line-height:1.8;
-  margin-bottom:26px;
-}
+      padding:30px 24px;
 
-.options{
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-  position:relative;
-}
+      box-shadow:
+        0 0 40px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.05);
+    }
 
-.btn{
-  width:100%;
-  border:none;
-  border-radius:18px;
-  padding:16px 18px;
-  font-family:'Cairo',sans-serif;
-  font-size:15px;
-  font-weight:700;
-  cursor:pointer;
-  transition:.2s;
-}
+    .glow{
+      position:absolute;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      filter:blur(70px);
+      opacity:.25;
+      pointer-events:none;
+    }
 
-.fake{
-  position:absolute;
-  width:100%;
-  left:0;
-  background:#0f172a;
-  color:#dce3f8;
-  border:1px solid rgba(255,255,255,.08);
-  box-shadow:0 10px 30px rgba(0,0,0,.25);
-}
+    .one{
+      background:#a259ff;
+      top:-90px;
+      right:-90px;
+    }
 
-.fake:hover{
-  transform:scale(1.02);
-}
+    .two{
+      background:#1abcfe;
+      bottom:-90px;
+      left:-90px;
+    }
 
-.real{
-  position:relative;
-  background:linear-gradient(135deg,#7c3aed,#2563eb);
-  color:white;
-  box-shadow:0 12px 25px rgba(124,58,237,.35);
-}
+    .logo{
+      display:flex;
+      justify-content:center;
+      margin-bottom:20px;
+      position:relative;
+      z-index:2;
+    }
 
-.real:active{
-  transform:scale(.98);
-}
+    .dots{
+      display:flex;
+      gap:8px;
+    }
 
-#thanks{
-  display:none;
-  text-align:center;
-}
+    .dot{
+      width:14px;
+      height:14px;
+      border-radius:50%;
+    }
 
-.success{
-  width:150px;
-  height:150px;
-  border-radius:50%;
-  margin:24px auto 18px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:30px;
-  font-weight:800;
-  background:
-    conic-gradient(#8b5cf6 0deg,#06b6d4 180deg,#22c55e 360deg);
-  position:relative;
-}
+    .d1{background:#f24e1e;}
+    .d2{background:#ff7262;}
+    .d3{background:#a259ff;}
+    .d4{background:#1abcfe;}
+    .d5{background:#0acf83;}
 
-.success::before{
-  content:"";
-  position:absolute;
-  inset:12px;
-  background:#0f172a;
-  border-radius:50%;
-}
+    .title{
+      text-align:center;
+      font-size:30px;
+      font-weight:800;
+      line-height:1.6;
+      margin-bottom:12px;
+      position:relative;
+      z-index:2;
+    }
 
-.success span{
-  position:relative;
-  z-index:2;
-}
+    .subtitle{
+      text-align:center;
+      color:#b9c1d9;
+      font-size:15px;
+      margin-bottom:34px;
+      position:relative;
+      z-index:2;
+    }
 
-.thanks-title{
-  font-size:32px;
-  font-weight:800;
-  margin-bottom:10px;
-}
+    .options{
+      position:relative;
+      height:470px;
+      z-index:2;
+    }
 
-.team{
-  color:#c6d0ea;
-  line-height:2;
-  margin-top:14px;
-  font-size:16px;
-}
+    .btn{
+      width:100%;
 
-.credit{
-  margin-top:10px;
-  color:#8fa0c7;
-}
+      border:none;
+      border-radius:20px;
 
-@media (max-width:420px){
+      padding:18px 18px;
 
-  .title{
-    font-size:24px;
-  }
+      font-family:'Cairo',sans-serif;
+      font-size:15px;
+      font-weight:700;
 
-  .btn{
-    font-size:14px;
-    padding:15px;
-  }
+      cursor:pointer;
 
-}
-</style>
+      background:#111827;
+      color:#eef2ff;
+
+      border:1px solid rgba(255,255,255,.08);
+
+      box-shadow:
+        0 12px 30px rgba(0,0,0,.22);
+
+      transition:
+        top .05s linear,
+        left .05s linear,
+        transform .08s;
+    }
+
+    .btn:hover{
+      transform:scale(1.03);
+    }
+
+    .fake{
+      position:absolute;
+      right:0;
+    }
+
+    .real{
+      position:absolute;
+      left:0;
+      bottom:0;
+    }
+
+    #thanks{
+      display:none;
+      text-align:center;
+    }
+
+    .thanks-title{
+      font-size:34px;
+      font-weight:800;
+      margin-top:40px;
+      margin-bottom:14px;
+      position:relative;
+      z-index:2;
+    }
+
+    .credit{
+      color:#c7d2fe;
+      line-height:2;
+      position:relative;
+      z-index:2;
+    }
+
+    .team{
+      margin-top:16px;
+      font-size:19px;
+      line-height:2;
+      color:#eef2ff;
+      position:relative;
+      z-index:2;
+    }
+
+    .circle{
+      width:190px;
+      height:190px;
+
+      margin:38px auto 0;
+
+      border-radius:50%;
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      position:relative;
+
+      background:
+        conic-gradient(
+          #a259ff,
+          #1abcfe,
+          #0acf83,
+          #a259ff
+        );
+
+      animation:spin 4s linear infinite;
+    }
+
+    .circle::before{
+      content:"";
+      position:absolute;
+      inset:12px;
+      border-radius:50%;
+      background:#0b1020;
+    }
+
+    .circle span{
+      position:relative;
+      z-index:2;
+      font-size:32px;
+      font-weight:800;
+      line-height:1.5;
+    }
+
+    @keyframes spin{
+      from{
+        transform:rotate(0deg);
+      }
+      to{
+        transform:rotate(360deg);
+      }
+    }
+
+    @media (max-width:430px){
+
+      .card{
+        min-height:680px;
+      }
+
+      .options{
+        height:430px;
+      }
+
+      .title{
+        font-size:26px;
+      }
+
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+  <div class="container">
 
-  <div class="card" id="survey">
+    <!-- Survey -->
+    <div class="card" id="survey">
 
-    <div class="glow one"></div>
-    <div class="glow two"></div>
+      <div class="glow one"></div>
+      <div class="glow two"></div>
 
-    <div class="logo">
-      <div class="dots">
-        <div class="dot d1"></div>
-        <div class="dot d2"></div>
-        <div class="dot d3"></div>
-        <div class="dot d4"></div>
-        <div class="dot d5"></div>
+      <div class="logo">
+        <div class="dots">
+          <div class="dot d1"></div>
+          <div class="dot d2"></div>
+          <div class="dot d3"></div>
+          <div class="dot d4"></div>
+          <div class="dot d5"></div>
+        </div>
       </div>
+
+      <div class="title">
+        ما مدى رضاك عن الورشة ؟
+      </div>
+
+      <div class="subtitle">
+        ورشة UI/UX وبرنامج Figma ✨
+      </div>
+
+      <div class="options" id="optionsBox">
+
+        <button class="btn fake">
+          لا بأس
+        </button>
+
+        <button class="btn fake">
+          جيد نوعًا ما
+        </button>
+
+        <button class="btn fake">
+          ما استفدت
+        </button>
+
+        <button class="btn real" id="realBtn">
+          أحلى سشن وأحلى ورشة والتقديم مثالي
+          ولا غلطة وماكنت أتخيل ورشة عمل بهالجمال ✨
+        </button>
+
+      </div>
+
     </div>
 
-    <div class="title">
-      ما مدى رضاك عن الورشة ؟
-    </div>
+    <!-- Thanks -->
+    <div class="card" id="thanks">
 
-    <div class="subtitle">
-      ورشة UI/UX وبرنامج Figma ✨
-    </div>
+      <div class="glow one"></div>
+      <div class="glow two"></div>
 
-    <div class="options" id="optionsBox">
+      <div class="thanks-title">
+        شكرًا لكم 💜
+      </div>
 
-      <button class="btn fake" id="b1">
-        لا بأس
-      </button>
+      <div class="credit">
+        مع تحيات فريق العمل:
+      </div>
 
-      <button class="btn fake" id="b2">
-        جيد نوعًا ما
-      </button>
+      <div class="team">
+        Seba<br>
+        Shatha<br>
+        Aljawharah
+      </div>
 
-      <button class="btn fake" id="b3">
-        ما استفدت
-      </button>
-
-      <button class="btn real" id="realBtn">
-        أحلى سشن وأحلى ورشة والتقديم مثالي ولا غلطة وماكنت أتخيل ورشة عمل بهالجمال ✨
-      </button>
+      <div class="circle">
+        <span>
+          100%<br>
+          راضي
+        </span>
+      </div>
 
     </div>
 
   </div>
 
+  <script>
 
-  <div class="card" id="thanks">
+    const fakeButtons = document.querySelectorAll('.fake');
+    const optionsBox = document.getElementById('optionsBox');
 
-    <div class="glow one"></div>
-    <div class="glow two"></div>
+    function moveButton(button){
 
-    <div class="thanks-title">
-      شكرًا لكم 💜
-    </div>
+      const areaWidth = optionsBox.clientWidth - button.offsetWidth;
+      const areaHeight = optionsBox.clientHeight - button.offsetHeight - 90;
 
-    <div class="credit">
-      مع تحيات فريق العمل:
-    </div>
+      const x = Math.random() * areaWidth;
+      const y = Math.random() * areaHeight;
 
-    <div class="team">
-      Seba<br>
-      Shatha<br>
-      Aljawharah
-    </div>
+      button.style.left = `${x}px`;
+      button.style.top = `${y}px`;
+    }
 
-    <div class="success">
-      <span>100%<br>راضي</span>
-    </div>
+    fakeButtons.forEach((btn,index)=>{
 
-  </div>
+      btn.style.top = `${index * 90}px`;
 
-</div>
+      btn.addEventListener('mouseenter',()=>{
+        moveButton(btn);
+      });
 
+      btn.addEventListener('touchstart',(e)=>{
+        e.preventDefault();
+        moveButton(btn);
+      },{passive:false});
 
-<script>
+    });
 
-const fakeButtons = document.querySelectorAll('.fake');
-const container = document.getElementById('optionsBox');
+    document
+      .getElementById('realBtn')
+      .addEventListener('click',()=>{
 
-function moveButton(button){
+        document.getElementById('survey').style.display='none';
+        document.getElementById('thanks').style.display='block';
 
-  const containerRect = container.getBoundingClientRect();
+      });
 
-  const maxX = container.clientWidth - button.offsetWidth;
-  const maxY = container.clientHeight - button.offsetHeight - 80;
-
-  const randomX = Math.random() * maxX;
-  const randomY = Math.random() * maxY;
-
-  button.style.left = randomX + 'px';
-  button.style.top = randomY + 'px';
-}
-
-fakeButtons.forEach(btn => {
-
-  btn.addEventListener('mouseenter', () => {
-    moveButton(btn);
-  });
-
-  btn.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    moveButton(btn);
-  }, { passive:false });
-
-});
-
-document.getElementById('realBtn').addEventListener('click', () => {
-
-  document.getElementById('survey').style.display = 'none';
-  document.getElementById('thanks').style.display = 'block';
-
-});
-
-</script>
+  </script>
 
 </body>
+
 </html>
