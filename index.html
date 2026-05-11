@@ -1,408 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>استبيان ورشة UI/UX</title>
-
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
-
-    body{
-      font-family:'Cairo',sans-serif;
-      min-height:100vh;
-      overflow:hidden;
-
-      display:flex;
-      justify-content:center;
-      align-items:center;
-
-      padding:20px;
-
-      background:
-        radial-gradient(circle at top right,#312e81 0%,transparent 30%),
-        radial-gradient(circle at bottom left,#0f766e 0%,transparent 25%),
-        linear-gradient(160deg,#050816,#0b1020,#111827);
-
-      color:white;
-    }
-
-    .container{
-      width:100%;
-      max-width:430px;
-    }
-
-    .card{
-      position:relative;
-      overflow:hidden;
-
-      min-height:720px;
-
-      background:rgba(17,24,39,.82);
-      backdrop-filter:blur(14px);
-
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:34px;
-
-      padding:30px 24px;
-
-      box-shadow:
-        0 0 40px rgba(0,0,0,.35),
-        inset 0 1px 0 rgba(255,255,255,.05);
-    }
-
-    .glow{
-      position:absolute;
-      width:220px;
-      height:220px;
-      border-radius:50%;
-      filter:blur(70px);
-      opacity:.25;
-      pointer-events:none;
-    }
-
-    .one{
-      background:#a259ff;
-      top:-90px;
-      right:-90px;
-    }
-
-    .two{
-      background:#1abcfe;
-      bottom:-90px;
-      left:-90px;
-    }
-
-    .logo{
-      display:flex;
-      justify-content:center;
-      margin-bottom:20px;
-      position:relative;
-      z-index:2;
-    }
-
-    .dots{
-      display:flex;
-      gap:8px;
-    }
-
-    .dot{
-      width:14px;
-      height:14px;
-      border-radius:50%;
-    }
-
-    .d1{background:#f24e1e;}
-    .d2{background:#ff7262;}
-    .d3{background:#a259ff;}
-    .d4{background:#1abcfe;}
-    .d5{background:#0acf83;}
-
-    .title{
-      text-align:center;
-      font-size:30px;
-      font-weight:800;
-      line-height:1.6;
-      margin-bottom:12px;
-      position:relative;
-      z-index:2;
-    }
-
-    .subtitle{
-      text-align:center;
-      color:#b9c1d9;
-      font-size:15px;
-      margin-bottom:34px;
-      position:relative;
-      z-index:2;
-    }
-
-    .options{
-      position:relative;
-      height:470px;
-      z-index:2;
-    }
-
-    .btn{
-      width:100%;
-
-      border:none;
-      border-radius:20px;
-
-      padding:18px 18px;
-
-      font-family:'Cairo',sans-serif;
-      font-size:15px;
-      font-weight:700;
-
-      cursor:pointer;
-
-      background:#111827;
-      color:#eef2ff;
-
-      border:1px solid rgba(255,255,255,.08);
-
-      box-shadow:
-        0 12px 30px rgba(0,0,0,.22);
-
-      transition:
-        top .05s linear,
-        left .05s linear,
-        transform .08s;
-    }
-
-    .btn:hover{
-      transform:scale(1.03);
-    }
-
-    .fake{
-      position:absolute;
-      right:0;
-    }
-
-    .real{
-      position:absolute;
-      left:0;
-      bottom:0;
-    }
-
-    #thanks{
-      display:none;
-      text-align:center;
-    }
-
-    .thanks-title{
-      font-size:34px;
-      font-weight:800;
-      margin-top:40px;
-      margin-bottom:14px;
-      position:relative;
-      z-index:2;
-    }
-
-    .credit{
-      color:#c7d2fe;
-      line-height:2;
-      position:relative;
-      z-index:2;
-    }
-
-    .team{
-      margin-top:16px;
-      font-size:19px;
-      line-height:2;
-      color:#eef2ff;
-      position:relative;
-      z-index:2;
-    }
-
-    .circle{
-      width:190px;
-      height:190px;
-
-      margin:38px auto 0;
-
-      border-radius:50%;
-
-      display:flex;
-      justify-content:center;
-      align-items:center;
-
-      position:relative;
-
-      background:
-        conic-gradient(
-          #a259ff,
-          #1abcfe,
-          #0acf83,
-          #a259ff
-        );
-
-      animation:spin 4s linear infinite;
-    }
-
-    .circle::before{
-      content:"";
-      position:absolute;
-      inset:12px;
-      border-radius:50%;
-      background:#0b1020;
-    }
-
-    .circle span{
-      position:relative;
-      z-index:2;
-      font-size:32px;
-      font-weight:800;
-      line-height:1.5;
-    }
-
-    @keyframes spin{
-      from{
-        transform:rotate(0deg);
-      }
-      to{
-        transform:rotate(360deg);
-      }
-    }
-
-    @media (max-width:430px){
-
-      .card{
-        min-height:680px;
-      }
-
-      .options{
-        height:430px;
-      }
-
-      .title{
-        font-size:26px;
-      }
-
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="container">
-
-    <!-- Survey 
-    <div class="card" id="survey">
-
-      <div class="glow one"></div>
-      <div class="glow two"></div>
-
-      <div class="logo">
-        <div class="dots">
-          <div class="dot d1"></div>
-          <div class="dot d2"></div>
-          <div class="dot d3"></div>
-          <div class="dot d4"></div>
-          <div class="dot d5"></div>
-        </div>
-      </div>
-
-      <div class="title">
-        ما مدى رضاك عن الورشة ؟
-      </div>
-
-      <div class="subtitle">
-        ورشة UI/UX وبرنامج Figma ✨
-      </div>
-
-      <div class="options" id="optionsBox">
-
-        <button class="btn fake">
-          لا بأس
-        </button>
-
-        <button class="btn fake">
-          جيد نوعًا ما
-        </button>
-
-        <button class="btn fake">
-          ما استفدت
-        </button>
-
-        <button class="btn real" id="realBtn">
-          أحلى سشن وأحلى ورشة والتقديم مثالي
-          ولا غلطة وماكنت أتخيل ورشة عمل بهالجمال ✨
-        </button>
-
-      </div>
-
-    </div>
-
-    <!-- Thanks 
-    <div class="card" id="thanks">
-
-      <div class="glow one"></div>
-      <div class="glow two"></div>
-
-      <div class="thanks-title">
-        شكرًا لكم 💜
-      </div>
-
-      <div class="credit">
-        مع تحيات فريق العمل:
-      </div>
-
-      <div class="team">
-        Seba<br>
-        Shatha<br>
-        Aljawharah
-      </div>
-
-      <div class="circle">
-        <span>
-          100%<br>
-          راضي
-        </span>
-      </div>
-
-    </div>
-
-  </div>
-
-  <script>
-
-    const fakeButtons = document.querySelectorAll('.fake');
-    const optionsBox = document.getElementById('optionsBox');
-
-    function moveButton(button){
-
-      const areaWidth = optionsBox.clientWidth - button.offsetWidth;
-      const areaHeight = optionsBox.clientHeight - button.offsetHeight - 90;
-
-      const x = Math.random() * areaWidth;
-      const y = Math.random() * areaHeight;
-
-      button.style.left = `${x}px`;
-      button.style.top = `${y}px`;
-    }
-
-    fakeButtons.forEach((btn,index)=>{
-
-      btn.style.top = `${index * 90}px`;
-
-      btn.addEventListener('mouseenter',()=>{
-        moveButton(btn);
-      });
-
-      btn.addEventListener('touchstart',(e)=>{
-        e.preventDefault();
-        moveButton(btn);
-      },{passive:false});
-
-    });
-
-    document
-      .getElementById('realBtn')
-      .addEventListener('click',()=>{
-
-        document.getElementById('survey').style.display='none';
-        document.getElementById('thanks').style.display='block';
-
-      });
-
-  </script>
-
-</body>
-
-</html>
--->
-
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -474,13 +69,48 @@
       pointer-events:none;
     }
 
-    .one{background:#a259ff; top:-100px; right:-90px;}
-    .two{background:#1abcfe; bottom:-100px; left:-90px;}
+    .one{
+      background:#a259ff;
+      top:-100px;
+      right:-90px;
+    }
+
+    .two{
+      background:#1abcfe;
+      bottom:-100px;
+      left:-90px;
+    }
+
+    .logo{
+      display:flex;
+      justify-content:center;
+      margin-bottom:18px;
+      position:relative;
+      z-index:5;
+    }
+
+    .dots{
+      display:flex;
+      gap:8px;
+    }
+
+    .dot{
+      width:13px;
+      height:13px;
+      border-radius:50%;
+    }
+
+    .d1{background:#f24e1e;}
+    .d2{background:#ff7262;}
+    .d3{background:#a259ff;}
+    .d4{background:#1abcfe;}
+    .d5{background:#0acf83;}
 
     .title{
       text-align:center;
       font-size:31px;
       font-weight:800;
+      line-height:1.6;
       margin-bottom:10px;
       position:relative;
       z-index:5;
@@ -507,6 +137,7 @@
 
       border:none;
       border-radius:18px;
+
       padding:13px 16px;
 
       font-family:'Cairo',sans-serif;
@@ -520,18 +151,46 @@
 
       border:1px solid rgba(255,255,255,.08);
 
-      box-shadow:0 10px 25px rgba(0,0,0,.25);
+      box-shadow:
+        0 10px 25px rgba(0,0,0,.25);
 
-      transition:left .05s linear, top .05s linear, transform .2s;
+      transition:
+        left .03s linear,
+        top .03s linear,
+        transform .08s;
+
+      user-select:none;
+      -webkit-user-select:none;
     }
 
-    .fake{ width:150px; }
+    .fake{
+      width:150px;
+    }
 
     .real{
       width:220px;
+
       left:50%;
       bottom:18px;
-      transform:translateX(-50%);
+
+      transform:translateX(-50%) scale(1);
+      transform-origin:center;
+    }
+
+    .real.grow{
+      animation:pulse .25s ease;
+    }
+
+    @keyframes pulse{
+      0%{
+        transform:translateX(-50%) scale(1);
+      }
+      50%{
+        transform:translateX(-50%) scale(1.08);
+      }
+      100%{
+        transform:translateX(-50%) scale(1);
+      }
     }
 
     #thanks{
@@ -543,6 +202,16 @@
       font-size:36px;
       font-weight:800;
       margin-top:80px;
+      margin-bottom:12px;
+      position:relative;
+      z-index:5;
+    }
+
+    .credit{
+      color:#c7d2fe;
+      line-height:2;
+      position:relative;
+      z-index:5;
     }
 
     .team{
@@ -550,106 +219,209 @@
       font-size:20px;
       line-height:2;
       color:#eef2ff;
+      position:relative;
+      z-index:5;
     }
 
+    .circle{
+      width:200px;
+      height:200px;
+
+      margin:45px auto 0;
+
+      border-radius:50%;
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      position:relative;
+
+      background:
+        conic-gradient(
+          #a259ff,
+          #1abcfe,
+          #0acf83,
+          #a259ff
+        );
+
+      animation:spin 4s linear infinite;
+    }
+
+    .circle::before{
+      content:"";
+      position:absolute;
+      inset:12px;
+      border-radius:50%;
+      background:#0b1020;
+    }
+
+    .circle span{
+      position:relative;
+      z-index:2;
+
+      font-size:34px;
+      font-weight:800;
+      line-height:1.5;
+    }
+
+    @keyframes spin{
+      from{
+        transform:rotate(0deg);
+      }
+      to{
+        transform:rotate(360deg);
+      }
+    }
   </style>
 </head>
 
 <body>
 
-<div class="container">
+  <div class="container">
 
-  <!-- Survey -->
-  <div class="card" id="survey">
+    <!-- Survey -->
+    <div class="card" id="survey">
 
-    <div class="glow one"></div>
-    <div class="glow two"></div>
+      <div class="glow one"></div>
+      <div class="glow two"></div>
 
-    <div class="title">ما مدى رضاك عن الورشة ؟</div>
-    <div class="subtitle">ورشة UI/UX وبرنامج Figma ✨</div>
+      <div class="logo">
+        <div class="dots">
+          <div class="dot d1"></div>
+          <div class="dot d2"></div>
+          <div class="dot d3"></div>
+          <div class="dot d4"></div>
+          <div class="dot d5"></div>
+        </div>
+      </div>
 
-    <div class="options" id="optionsBox">
+      <div class="title">
+        ما مدى رضاك عن الورشة ؟
+      </div>
 
-      <button class="btn fake">لا بأس</button>
-      <button class="btn fake">جيد نوعًا ما</button>
-      <button class="btn fake">ما استفدت</button>
+      <div class="subtitle">
+        ورشة UI/UX وبرنامج Figma ✨
+      </div>
 
-      <button class="btn real" id="realBtn">
-        أحلى سشن وأحلى ورشة ✨
-      </button>
+      <div class="options" id="optionsBox">
+
+        <button class="btn fake">
+          لا بأس
+        </button>
+
+        <button class="btn fake">
+          جيد نوعًا ما
+        </button>
+
+        <button class="btn fake">
+          ما استفدت
+        </button>
+
+        <button class="btn real" id="realBtn">
+          أحلى سشن وأحلى ورشة ✨
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- Thanks -->
+    <div class="card" id="thanks">
+
+      <div class="glow one"></div>
+      <div class="glow two"></div>
+
+      <div class="thanks-title">
+        شكرًا لكم 💜
+      </div>
+
+      <div class="credit">
+        مع تحيات فريق العمل:
+      </div>
+
+      <div class="team">
+        Seba<br>
+        Shatha<br>
+        Aljawharah
+      </div>
+
+      <div class="circle">
+        <span>
+          100%<br>
+          راضي
+        </span>
+      </div>
 
     </div>
 
   </div>
 
-  <!-- Thanks -->
-  <div class="card" id="thanks">
-
-    <div class="glow one"></div>
-    <div class="glow two"></div>
-
-    <div class="thanks-title">شكرًا لكم 💜</div>
-
-    <div class="team">
-      Seba<br>
-      Shatha<br>
-      Aljawharah
-    </div>
-
-  </div>
-
-</div>
-
-<script>
+  <script>
 
 const fakeButtons = document.querySelectorAll('.fake');
 const optionsBox = document.getElementById('optionsBox');
 const realBtn = document.getElementById('realBtn');
 
-const clickCount = new Map();
+let scale = 1;
 
-// تحريك عشوائي
-function moveButton(btn){
+function moveButton(button){
+  
+  const maxX =
+    optionsBox.clientWidth - button.offsetWidth;
 
-  const maxX = optionsBox.clientWidth - btn.offsetWidth;
-  const maxY = optionsBox.clientHeight - btn.offsetHeight - 120;
+  const maxY =
+    optionsBox.clientHeight - button.offsetHeight - 120;
 
   const x = Math.random() * maxX;
   const y = Math.random() * maxY;
 
-  btn.style.left = `${x}px`;
-  btn.style.top = `${y}px`;
+  button.style.left = `${x}px`;
+  button.style.top = `${y}px`;
 }
 
-// التعامل مع الهروب فقط
-function handleFake(btn){
-
-  let count = clickCount.get(btn) || 0;
-  count++;
-
-  clickCount.set(btn, count);
-
-  // كل مرة يهرب بدون اختفاء
-  moveButton(btn);
-}
-
-// تشغيل الأزرار المزيفة
-fakeButtons.forEach(btn=>{
+fakeButtons.forEach((btn)=>{
 
   moveButton(btn);
 
-  ['mouseenter','mousemove','click','touchstart'].forEach(ev=>{
-    btn.addEventListener(ev, (e)=>{
-      e.preventDefault();
-      handleFake(btn);
-    });
-  });
+  const escape = (e)=>{
+
+    e.preventDefault();
+
+    moveButton(btn);
+
+  };
+
+  btn.addEventListener(
+    'mouseenter',
+    escape
+  );
+
+  btn.addEventListener(
+    'mousemove',
+    escape
+  );
+
+  btn.addEventListener(
+    'touchstart',
+    escape,
+    { passive:false }
+  );
+
+  btn.addEventListener(
+    'click',
+    escape
+  );
 
 });
 
-// زر الحقيقي
-realBtn.addEventListener('click',()=>{
+realBtn.addEventListener('click', () => {
 
+  // إيقاف أي تأثير تكبير
+  realBtn.style.transition = 'none';
+  realBtn.style.transform = 'translateX(-50%) scale(1)';
+
+  // انتقال مباشر للشكر
   document.getElementById('survey').style.display = 'none';
   document.getElementById('thanks').style.display = 'block';
 
@@ -658,4 +430,5 @@ realBtn.addEventListener('click',()=>{
 </script>
 
 </body>
+
 </html>
