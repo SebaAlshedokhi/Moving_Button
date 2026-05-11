@@ -273,6 +273,30 @@
         transform:rotate(360deg);
       }
     }
+
+    @media (max-width: 600px) {
+
+  .options{
+    height: 60vh;
+  }
+
+  .real{
+    bottom: 28px; /* يطلع شوي فوق */
+  }
+
+  .btn{
+    font-size: 13px;
+    padding: 12px 14px;
+  }
+
+  .fake{
+    width: 130px;
+  }
+
+  .real{
+    width: 200px;
+  }
+}
   </style>
 </head>
 
@@ -366,7 +390,7 @@ const realBtn = document.getElementById('realBtn');
 let scale = 1;
 
 function moveButton(button){
-  
+
   const maxX =
     optionsBox.clientWidth - button.offsetWidth;
 
