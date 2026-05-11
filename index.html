@@ -402,6 +402,7 @@
 </html>
 -->
 
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -424,10 +425,16 @@
       font-family:'Cairo',sans-serif;
       min-height:100vh;
       overflow:hidden;
+
       display:flex;
       justify-content:center;
       align-items:center;
-      background:linear-gradient(160deg,#050816,#0b1020,#111827);
+
+      background:
+        radial-gradient(circle at top right,#312e81 0%,transparent 30%),
+        radial-gradient(circle at bottom left,#0f766e 0%,transparent 25%),
+        linear-gradient(160deg,#050816,#0b1020,#111827);
+
       color:white;
     }
 
@@ -438,21 +445,45 @@
 
     .card{
       position:relative;
+      overflow:hidden;
+
       width:100%;
       min-height:92vh;
+
       border-radius:34px;
+
       padding:26px 20px;
+
       background:rgba(17,24,39,.84);
       backdrop-filter:blur(14px);
+
       border:1px solid rgba(255,255,255,.08);
-      overflow:hidden;
+
+      box-shadow:
+        0 0 50px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.05);
     }
+
+    .glow{
+      position:absolute;
+      width:240px;
+      height:240px;
+      border-radius:50%;
+      filter:blur(70px);
+      opacity:.25;
+      pointer-events:none;
+    }
+
+    .one{background:#a259ff; top:-100px; right:-90px;}
+    .two{background:#1abcfe; bottom:-100px; left:-90px;}
 
     .title{
       text-align:center;
       font-size:31px;
       font-weight:800;
       margin-bottom:10px;
+      position:relative;
+      z-index:5;
     }
 
     .subtitle{
@@ -460,28 +491,38 @@
       color:#c7d2fe;
       font-size:15px;
       margin-bottom:28px;
+      position:relative;
+      z-index:5;
     }
 
     .options{
       position:relative;
       width:100%;
       height:72vh;
+      z-index:5;
     }
 
     .btn{
       position:absolute;
+
       border:none;
       border-radius:18px;
       padding:13px 16px;
-      font-family:'Cairo';
+
+      font-family:'Cairo',sans-serif;
       font-size:14px;
       font-weight:700;
+
       cursor:pointer;
+
       background:#111827;
       color:#eef2ff;
+
       border:1px solid rgba(255,255,255,.08);
-      transition:left .08s ease, top .08s ease;
-      touch-action:none; /* مهم للجوال */
+
+      box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+      transition:left .05s linear, top .05s linear, transform .2s;
     }
 
     .fake{ width:150px; }
@@ -504,6 +545,13 @@
       margin-top:80px;
     }
 
+    .team{
+      margin-top:16px;
+      font-size:20px;
+      line-height:2;
+      color:#eef2ff;
+    }
+
   </style>
 </head>
 
@@ -511,7 +559,11 @@
 
 <div class="container">
 
+  <!-- Survey -->
   <div class="card" id="survey">
+
+    <div class="glow one"></div>
+    <div class="glow two"></div>
 
     <div class="title">ما مدى رضاك عن الورشة ؟</div>
     <div class="subtitle">ورشة UI/UX وبرنامج Figma ✨</div>
@@ -530,83 +582,68 @@
 
   </div>
 
+  <!-- Thanks -->
   <div class="card" id="thanks">
+
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+
     <div class="thanks-title">شكرًا لكم 💜</div>
+
+    <div class="team">
+      Seba<br>
+      Shatha<br>
+      Aljawharah
+    </div>
+
   </div>
 
 </div>
 
 <script>
 
-const optionsBox = document.getElementById('optionsBox');
 const fakeButtons = document.querySelectorAll('.fake');
+const optionsBox = document.getElementById('optionsBox');
 const realBtn = document.getElementById('realBtn');
 
-function escape(btn, x, y){
+const clickCount = new Map();
 
-  const rect = btn.getBoundingClientRect();
-
-  const btnX = rect.left + rect.width / 2;
-  const btnY = rect.top + rect.height / 2;
-
-  let dx = btnX - x;
-  let dy = btnY - y;
-
-  const dist = Math.sqrt(dx*dx + dy*dy) || 1;
-
-  dx /= dist;
-  dy /= dist;
-
-  const move = 140;
-
-  let newX = btn.offsetLeft + dx * move;
-  let newY = btn.offsetTop + dy * move;
+// تحريك عشوائي
+function moveButton(btn){
 
   const maxX = optionsBox.clientWidth - btn.offsetWidth;
   const maxY = optionsBox.clientHeight - btn.offsetHeight - 120;
 
-  btn.style.left = Math.max(0, Math.min(maxX, newX)) + "px";
-  btn.style.top  = Math.max(0, Math.min(maxY, newY)) + "px";
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  btn.style.left = `${x}px`;
+  btn.style.top = `${y}px`;
 }
 
-// دعم موحد للجوال + الكمبيوتر
-function attachEscape(btn){
+// التعامل مع الهروب فقط
+function handleFake(btn){
 
-  let lastX = 0;
-  let lastY = 0;
+  let count = clickCount.get(btn) || 0;
+  count++;
 
-  optionsBox.addEventListener('pointermove', (e)=>{
+  clickCount.set(btn, count);
 
-    lastX = e.clientX;
-    lastY = e.clientY;
-
-    const rect = btn.getBoundingClientRect();
-
-    const dist = Math.hypot(
-      lastX - (rect.left + rect.width/2),
-      lastY - (rect.top + rect.height/2)
-    );
-
-    if(dist < 120){
-      escape(btn, lastX, lastY);
-    }
-
-  });
-
-  // للجوال (ضغط/سحب)
-  btn.addEventListener('pointerdown', (e)=>{
-    escape(btn, e.clientX, e.clientY);
-  });
-
+  // كل مرة يهرب بدون اختفاء
+  moveButton(btn);
 }
 
+// تشغيل الأزرار المزيفة
 fakeButtons.forEach(btn=>{
 
-  // مكان ابتدائي
-  btn.style.left = "40px";
-  btn.style.top = "60px";
+  moveButton(btn);
 
-  attachEscape(btn);
+  ['mouseenter','mousemove','click','touchstart'].forEach(ev=>{
+    btn.addEventListener(ev, (e)=>{
+      e.preventDefault();
+      handleFake(btn);
+    });
+  });
 
 });
 
