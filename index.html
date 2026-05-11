@@ -533,29 +533,6 @@
       transform:translateX(-50%);
     }
 
-    /* انفجار */
-    .explode{
-      animation:explode .45s ease forwards;
-      pointer-events:none;
-    }
-
-    @keyframes explode{
-      0%{
-        transform:scale(1);
-        opacity:1;
-        filter:blur(0);
-      }
-      60%{
-        transform:scale(1.6);
-        opacity:.8;
-      }
-      100%{
-        transform:scale(0);
-        opacity:0;
-        filter:blur(10px);
-      }
-    }
-
     #thanks{
       display:none;
       text-align:center;
@@ -630,7 +607,7 @@ const realBtn = document.getElementById('realBtn');
 
 const clickCount = new Map();
 
-// حركة عشوائية
+// تحريك عشوائي
 function moveButton(btn){
 
   const maxX = optionsBox.clientWidth - btn.offsetWidth;
@@ -643,16 +620,7 @@ function moveButton(btn){
   btn.style.top = `${y}px`;
 }
 
-// انفجار
-function explode(btn){
-  btn.classList.add('explode');
-
-  setTimeout(()=>{
-    btn.remove();
-  },450);
-}
-
-// التعامل مع الأزرار المزيفة
+// التعامل مع الهروب فقط
 function handleFake(btn){
 
   let count = clickCount.get(btn) || 0;
@@ -660,14 +628,11 @@ function handleFake(btn){
 
   clickCount.set(btn, count);
 
-  if(count < 2){
-    moveButton(btn);
-  } else {
-    explode(btn);
-  }
+  // كل مرة يهرب بدون اختفاء
+  moveButton(btn);
 }
 
-// تشغيل أولي
+// تشغيل الأزرار المزيفة
 fakeButtons.forEach(btn=>{
 
   moveButton(btn);
