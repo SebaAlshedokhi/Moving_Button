@@ -1,200 +1,341 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>استبيان ورشة UI/UX</title>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;700&display=swap');
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  .wrap {
-    font-family: 'Cairo', sans-serif;
-    min-height: 100vh;
-    background: #0d1117;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1rem;
-    direction: rtl;
-    overflow: hidden;
-    position: relative;
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Cairo',sans-serif;
+  min-height:100vh;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at top right,#312e81 0%,transparent 30%),
+    radial-gradient(circle at bottom left,#0f766e 0%,transparent 25%),
+    linear-gradient(160deg,#050816,#0b1020,#111827);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:18px;
+  color:white;
+}
+
+.container{
+  width:100%;
+  max-width:390px;
+  position:relative;
+}
+
+.card{
+  background:rgba(17,24,39,.82);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:30px;
+  padding:28px 22px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:
+    0 0 40px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.glow{
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  filter:blur(60px);
+  opacity:.25;
+}
+
+.glow.one{
+  background:#a259ff;
+  top:-70px;
+  right:-60px;
+}
+
+.glow.two{
+  background:#1abcfe;
+  bottom:-70px;
+  left:-60px;
+}
+
+.logo{
+  display:flex;
+  justify-content:center;
+  margin-bottom:18px;
+}
+
+.logo .dots{
+  display:flex;
+  gap:8px;
+}
+
+.dot{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+}
+
+.d1{background:#f24e1e;}
+.d2{background:#ff7262;}
+.d3{background:#a259ff;}
+.d4{background:#1abcfe;}
+.d5{background:#0acf83;}
+
+.title{
+  text-align:center;
+  font-size:28px;
+  font-weight:800;
+  line-height:1.5;
+  margin-bottom:12px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#b9c1d9;
+  font-size:14px;
+  line-height:1.8;
+  margin-bottom:26px;
+}
+
+.options{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  position:relative;
+}
+
+.btn{
+  width:100%;
+  border:none;
+  border-radius:18px;
+  padding:16px 18px;
+  font-family:'Cairo',sans-serif;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.fake{
+  position:absolute;
+  width:100%;
+  left:0;
+  background:#0f172a;
+  color:#dce3f8;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.fake:hover{
+  transform:scale(1.02);
+}
+
+.real{
+  position:relative;
+  background:linear-gradient(135deg,#7c3aed,#2563eb);
+  color:white;
+  box-shadow:0 12px 25px rgba(124,58,237,.35);
+}
+
+.real:active{
+  transform:scale(.98);
+}
+
+#thanks{
+  display:none;
+  text-align:center;
+}
+
+.success{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  margin:24px auto 18px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:30px;
+  font-weight:800;
+  background:
+    conic-gradient(#8b5cf6 0deg,#06b6d4 180deg,#22c55e 360deg);
+  position:relative;
+}
+
+.success::before{
+  content:"";
+  position:absolute;
+  inset:12px;
+  background:#0f172a;
+  border-radius:50%;
+}
+
+.success span{
+  position:relative;
+  z-index:2;
+}
+
+.thanks-title{
+  font-size:32px;
+  font-weight:800;
+  margin-bottom:10px;
+}
+
+.team{
+  color:#c6d0ea;
+  line-height:2;
+  margin-top:14px;
+  font-size:16px;
+}
+
+.credit{
+  margin-top:10px;
+  color:#8fa0c7;
+}
+
+@media (max-width:420px){
+
+  .title{
+    font-size:24px;
   }
-  .logo-line {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 2rem;
-    z-index: 2;
+
+  .btn{
+    font-size:14px;
+    padding:15px;
   }
-  .logo-text { font-size: 13px; color: #a8b2c1; }
-  .card {
-    background: #161b22;
-    border: 0.5px solid #30363d;
-    border-radius: 18px;
-    padding: 2.5rem 2rem;
-    width: 100%;
-    max-width: 500px;
-    text-align: center;
-    z-index: 2;
-    position: relative;
-  }
-  .question {
-    font-size: 20px;
-    font-weight: 700;
-    color: #e6edf3;
-    margin-bottom: 0.4rem;
-    line-height: 1.5;
-  }
-  .subtitle { font-size: 13px; color: #6e7681; margin-bottom: 2rem; }
-  .options { display: flex; flex-direction: column; gap: 14px; }
-  .opt-btn {
-    position: fixed;
-    border-radius: 12px;
-    border: 1.5px solid #30363d;
-    background: #0d1117;
-    color: #c9d1d9;
-    font-family: 'Cairo', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    padding: 14px 20px;
-    cursor: pointer;
-    text-align: right;
-    direction: rtl;
-    width: 200px;
-    transition: background 0.15s;
-    z-index: 999;
-  }
-  .opt-btn:hover { background: #1a1a2a; }
-  .real-btn {
-    position: static !important;
-    width: 100%;
-    border-radius: 12px;
-    border: 1.5px solid #a371f7;
-    background: #161b22;
-    color: #e6edf3;
-    font-family: 'Cairo', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    padding: 14px 20px;
-    cursor: pointer;
-    text-align: right;
-    direction: rtl;
-    transition: background 0.15s, transform 0.1s;
-  }
-  .real-btn:hover { background: #1f1540; border-color: #d2a8ff; }
-  .real-btn:active { transform: scale(0.98); }
-  .figma-dots { display: flex; gap: 6px; justify-content: center; margin-bottom: 1.5rem; }
-  .dot { width: 10px; height: 10px; border-radius: 50%; }
-  .d1{background:#1abcfe;} .d2{background:#ff7262;} .d3{background:#0acf83;} .d4{background:#a259ff;} .d5{background:#f24e1e;}
-  .thankyou {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 0;
-  }
-  .thankyou-title { font-size: 22px; font-weight: 700; color: #e6edf3; }
-  .thankyou-sub { font-size: 14px; color: #8b949e; line-height: 1.8; text-align: center; }
-  .team-names { margin-top: 0.5rem; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .team-chip {
-    background: #1a1030;
-    border: 1px solid #a371f740;
-    border-radius: 20px;
-    padding: 5px 16px;
-    font-size: 13px;
-    color: #d2a8ff;
-    font-weight: 500;
-  }
-  .placeholder-row {
-    height: 52px;
-    border-radius: 12px;
-    border: 1.5px dashed #30363d30;
-    background: transparent;
-  }
+
+}
 </style>
+</head>
 
-<div class="wrap" id="wrap">
-  <div class="logo-line">
-    <svg width="28" height="42" viewBox="0 0 38 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M19 28C19 22.477 23.477 18 29 18C34.523 18 39 22.477 39 28C39 33.523 34.523 38 29 38C23.477 38 19 33.523 19 28Z" fill="#1ABCFE"/>
-      <path d="M0 28C0 22.477 4.477 18 10 18H19V38H10C4.477 38 0 33.523 0 28Z" fill="#0ACF83"/>
-      <path d="M0 10C0 4.477 4.477 0 10 0H19V20H10C4.477 20 0 15.523 0 10Z" fill="#FF7262"/>
-      <path d="M19 0H28C33.523 0 38 4.477 38 10C38 15.523 33.523 20 28 20H19V0Z" fill="#F24E1E"/>
-      <path d="M0 46C0 40.477 4.477 36 10 36H19V46C19 51.523 14.523 56 9.5 56C4.253 56 0 51.523 0 46Z" fill="#A259FF"/>
-    </svg>
-    <span class="logo-text">ورشة UI/UX & Figma</span>
-  </div>
+<body>
 
-  <div class="card" id="survey-card">
-    <div class="figma-dots">
-      <div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div><div class="dot d4"></div><div class="dot d5"></div>
+<div class="container">
+
+  <div class="card" id="survey">
+
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+
+    <div class="logo">
+      <div class="dots">
+        <div class="dot d1"></div>
+        <div class="dot d2"></div>
+        <div class="dot d3"></div>
+        <div class="dot d4"></div>
+        <div class="dot d5"></div>
+      </div>
     </div>
-    <div class="question">ما مدى رضاك عن الورشة؟</div>
-    <p class="subtitle">اختر إجابتك من الخيارات أدناه</p>
 
-    <div class="options" id="options-list">
-      <div class="placeholder-row" id="ph1"></div>
-      <div class="placeholder-row" id="ph2"></div>
-      <div class="placeholder-row" id="ph3"></div>
-      <button class="real-btn" onclick="submitAnswer()">
-        أحلى سشن وأحلى ورشة والتقديم مثالي ولا غلطة وماكنت أتخيل ورشة عمل بهالحمال ✨
+    <div class="title">
+      ما مدى رضاك عن الورشة ؟
+    </div>
+
+    <div class="subtitle">
+      ورشة UI/UX وبرنامج Figma ✨
+    </div>
+
+    <div class="options" id="optionsBox">
+
+      <button class="btn fake" id="b1">
+        لا بأس
       </button>
+
+      <button class="btn fake" id="b2">
+        جيد نوعًا ما
+      </button>
+
+      <button class="btn fake" id="b3">
+        ما استفدت
+      </button>
+
+      <button class="btn real" id="realBtn">
+        أحلى سشن وأحلى ورشة والتقديم مثالي ولا غلطة وماكنت أتخيل ورشة عمل بهالجمال ✨
+      </button>
+
     </div>
+
   </div>
 
-  <div class="card thankyou" id="thankyou-card">
-    <div style="font-size:48px; margin-bottom:0.5rem;">🎉</div>
-    <div class="thankyou-title">شكرًا لكم!</div>
-    <p class="thankyou-sub">نسعد بمشاركتكم وآرائكم الثمينة<br>يسعدنا نلتقيكم في ورش قادمة 🚀</p>
-    <div style="margin-top:1rem; font-size:13px; color:#6e7681;">مع تحيات فريق العمل</div>
-    <div class="team-names">
-      <span class="team-chip">Seba</span>
-      <span class="team-chip">Shatha</span>
-      <span class="team-chip">Aljawharah</span>
+
+  <div class="card" id="thanks">
+
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+
+    <div class="thanks-title">
+      شكرًا لكم 💜
     </div>
-    <div class="figma-dots" style="margin-top:1.5rem; margin-bottom:0;">
-      <div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div><div class="dot d4"></div><div class="dot d5"></div>
+
+    <div class="credit">
+      مع تحيات فريق العمل:
     </div>
+
+    <div class="team">
+      Seba<br>
+      Shatha<br>
+      Aljawharah
+    </div>
+
+    <div class="success">
+      <span>100%<br>راضي</span>
+    </div>
+
   </div>
+
 </div>
 
+
 <script>
-const labels = ['لا بأس', 'جيد نوعًا ما', 'ما استفدت'];
-const escBtns = [];
 
-function randomPos() {
-  const margin = 60;
-  const W = window.innerWidth;
-  const H = window.innerHeight;
-  return {
-    x: margin + Math.random() * (W - margin * 2 - 220),
-    y: margin + Math.random() * (H - margin * 2 - 60)
-  };
+const fakeButtons = document.querySelectorAll('.fake');
+const container = document.getElementById('optionsBox');
+
+function moveButton(button){
+
+  const containerRect = container.getBoundingClientRect();
+
+  const maxX = container.clientWidth - button.offsetWidth;
+  const maxY = container.clientHeight - button.offsetHeight - 80;
+
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
+
+  button.style.left = randomX + 'px';
+  button.style.top = randomY + 'px';
 }
 
-function placeBtn(btn) {
-  const p = randomPos();
-  btn.style.left = p.x + 'px';
-  btn.style.top = p.y + 'px';
-}
+fakeButtons.forEach(btn => {
 
-function moveAway(btn, e) {
-  placeBtn(btn);
-}
+  btn.addEventListener('mouseenter', () => {
+    moveButton(btn);
+  });
 
-labels.forEach((label, i) => {
-  const btn = document.createElement('button');
-  btn.className = 'opt-btn';
-  btn.textContent = label;
-  const p = randomPos();
-  btn.style.left = p.x + 'px';
-  btn.style.top = p.y + 'px';
-  btn.addEventListener('mouseenter', () => moveAway(btn));
-  btn.addEventListener('touchstart', (e) => { e.preventDefault(); moveAway(btn); }, {passive: false});
-  document.body.appendChild(btn);
-  escBtns.push(btn);
+  btn.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    moveButton(btn);
+  }, { passive:false });
+
 });
 
-function submitAnswer() {
-  escBtns.forEach(b => b.style.display = 'none');
-  document.getElementById('survey-card').style.display = 'none';
-  const ty = document.getElementById('thankyou-card');
-  ty.style.display = 'flex';
-}
+document.getElementById('realBtn').addEventListener('click', () => {
+
+  document.getElementById('survey').style.display = 'none';
+  document.getElementById('thanks').style.display = 'block';
+
+});
+
 </script>
+
+</body>
+</html>
